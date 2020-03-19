@@ -1,6 +1,6 @@
 create database bookstore;
-create user '<username>'@'%' identified by '<password>';
-GRANT ALL PRIVILEGES ON university.* TO '<username>'@'%';
+create user '<user>'@'%' identified by '<password>';
+GRANT ALL PRIVILEGES ON bookstore.* TO '<user>'@'%';
 flush PRIVILEGES;
 
 USE bookstore;

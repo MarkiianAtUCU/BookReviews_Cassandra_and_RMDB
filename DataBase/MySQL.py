@@ -3,8 +3,8 @@ import mysql.connector as sql
 
 class MySQL:
     def __init__(self, user, password, ip):
-        conn = sql.connect(host='localhost', user='usr', password='password', database='bookstore')
-        self.cursor = conn.cursor()
+        self.conn = sql.connect(host='localhost', user='usr', password='password', database='bookstore')
+        self.cursor = self.conn.cursor()
 
     def reviews_by_product(self, product_id):
         self.cursor.execute(f"SELECT * FROM review WHERE product_id={product_id};")
