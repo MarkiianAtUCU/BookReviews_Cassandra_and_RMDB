@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, abort, Response
+from flask import Flask, jsonify
 from DataBase.Cassandra import Cassandra
 
 app = Flask(__name__)
@@ -46,4 +46,4 @@ def most_productive_backers(date_from, date_to, n):
 
 if __name__ == "__main__":
     database = Cassandra('<username>', '<password>', ['ip 1', 'ip 2'])
-    app.run()
+    app.run(debug=False)

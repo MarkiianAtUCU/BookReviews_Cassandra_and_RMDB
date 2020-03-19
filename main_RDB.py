@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, abort, Response
+from flask import Flask, jsonify
 from DataBase.MySQL import MySQL
 
 app = Flask(__name__)
@@ -21,7 +21,7 @@ def reviews_by_customer(customer_id):
 
 @app.route('/most_reviewed/<string:date_from>/<string:date_to>/<int:n>', methods=["GET"])
 def most_reviewed(date_from, date_to, n):
-    return jsonify(database.n_most_reviewed(date_from, date_to,n)), 200
+    return jsonify(database.n_most_reviewed(date_from, date_to, n)), 200
 
 
 @app.route('/most_productive/<string:date_from>/<string:date_to>/<int:n>', methods=["GET"])
@@ -46,4 +46,4 @@ def most_productive_backers(date_from, date_to, n):
 
 if __name__ == "__main__":
     database = MySQL('<usr>', '<password>', '<localhost>')
-    app.run()
+    app.run(debug=False)
