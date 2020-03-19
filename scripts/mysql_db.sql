@@ -36,8 +36,6 @@ CREATE TABLE review (
 	headline text,
 	body mediumtext,
 	date date,
-
     foreign key (product_id) references product(id),
     foreign key (marketplace_id) references marketplace(id)
-
 	);

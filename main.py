@@ -1,8 +1,6 @@
 from flask import Flask, jsonify, request, abort, Response
 from DataBase.Cassandra import Cassandra
 
-# print(c.n_most_reviewed("2014-10-10", "2014-10-11", 10))
-
 app = Flask(__name__)
 
 

@@ -66,7 +66,8 @@ class Cassandra:
         return [{"customer_id": i[0]} for i in get_n_most_productive(res, n)]
 
     def n_best(self, fraction, n):
-        res = self.session.execute(f"SELECT * FROM bookstore.reviews_by_fraction_of_five WHERE fraction_of_five={fraction} LIMIT {n};")
+        res = self.session.execute(
+            f"SELECT * FROM bookstore.reviews_by_fraction_of_five WHERE fraction_of_five={fraction} LIMIT {n};")
         return jsonify(res)
 
     def n_most_productive_haters(self, date_from, date_to, n):
