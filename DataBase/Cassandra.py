@@ -16,6 +16,9 @@ def jsonify(row_list):
     res = []
     for i in row_list:
         res.append(dict(i._asdict()))
+    for i in res:
+        if 'review_date' in i:
+            i['review_date'] = str(i['review_date'])
     return res
 
 
@@ -67,7 +70,7 @@ class Cassandra:
 
     def n_best(self, fraction, n):
         res = self.session.execute(
-            f"SELECT * FROM bookstore.reviews_by_fraction_of_five WHERE fraction_of_five={fraction} LIMIT {n};")
+            f"SELECT * FROM reviews_by_fraction_of_five WHERE fake_partition IN (0, 1) AND fraction_of_five={fraction} LIMIT {n};")
         return jsonify(res)
 
     def n_most_productive_haters(self, date_from, date_to, n):

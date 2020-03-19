@@ -45,5 +45,5 @@ def most_productive_backers(date_from, date_to, n):
 
 
 if __name__ == "__main__":
-    database = Cassandra('<username>', '<password>', ['<ip node 1>', '<ip node 2>'])
+    database = Cassandra('<username>', '<password>', ['ip 1', 'ip 2'])
     app.run()
