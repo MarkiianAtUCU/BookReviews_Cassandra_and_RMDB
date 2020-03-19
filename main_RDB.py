@@ -45,5 +45,5 @@ def most_productive_backers(date_from, date_to, n):
 
 
 if __name__ == "__main__":
-    database = MySQL('<username>', '<password>', '<ip>')
+    database = MySQL('<usr>', '<password>', '<localhost>')
     app.run()

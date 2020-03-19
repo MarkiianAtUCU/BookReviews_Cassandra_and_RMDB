@@ -61,6 +61,5 @@ CREATE TABLE reviews_by_date_star  (
     product_category text,
     product_id text,
     product_title text,
-
     PRIMARY KEY ((review_date), verified_purchase, star_rating, review_id)
 );

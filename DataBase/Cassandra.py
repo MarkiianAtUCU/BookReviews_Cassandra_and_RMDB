@@ -56,31 +56,37 @@ class Cassandra:
     def n_most_reviewed(self, date_from, date_to, n):
         date_list_formatted = ",".join(date_range_to_list(date_from, date_to))
         res = self.session.execute(
-            f"SELECT product_id FROM reviews_by_date_star WHERE review_date IN ({date_list_formatted});")
+            f"SELECT product_id FROM reviews_by_date_star WHERE review_date IN ({date_list_formatted});"
+        )
         result_product_id = ", ".join([f"'{i[0]}'" for i in get_n_most_reviewed(res, n)])
         res = self.session.execute(
-            f"SELECT product_id, product_category, product_title FROM bookstore.reviews_by_product WHERE product_id in ({result_product_id}) GROUP BY product_id;")
+            f"SELECT product_id, product_category, product_title FROM bookstore.reviews_by_product WHERE product_id in ({result_product_id}) GROUP BY product_id;"
+        )
         return jsonify(res)
 
     def n_most_productive(self, date_from, date_to, n):
         date_list_formatted = ",".join(date_range_to_list(date_from, date_to))
         res = self.session.execute(
-            f"SELECT customer_id FROM reviews_by_date_star WHERE review_date IN ({date_list_formatted}) AND verified_purchase=true;")
+            f"SELECT customer_id FROM reviews_by_date_star WHERE review_date IN ({date_list_formatted}) AND verified_purchase=true;"
+        )
         return [{"customer_id": i[0]} for i in get_n_most_productive(res, n)]
 
     def n_best(self, fraction, n):
         res = self.session.execute(
-            f"SELECT * FROM reviews_by_fraction_of_five WHERE fake_partition IN (0, 1) AND fraction_of_five={fraction} LIMIT {n};")
+            f"SELECT * FROM reviews_by_fraction_of_five WHERE fake_partition IN (0, 1) AND fraction_of_five={fraction} LIMIT {n};"
+        )
         return jsonify(res)
 
     def n_most_productive_haters(self, date_from, date_to, n):
         date_list_formatted = ",".join(date_range_to_list(date_from, date_to))
         res = self.session.execute(
-            f"SELECT customer_id FROM reviews_by_date_star WHERE review_date IN ({date_list_formatted}) AND verified_purchase in (true, false) AND star_rating <=2;")
+            f"SELECT customer_id FROM reviews_by_date_star WHERE review_date IN ({date_list_formatted}) AND verified_purchase in (true, false) AND star_rating <=2;"
+        )
         return [{"customer_id": i[0]} for i in get_n_most_productive(res, n)]
 
     def n_most_productive_backers(self, date_from, date_to, n):
         date_list_formatted = ",".join(date_range_to_list(date_from, date_to))
         res = self.session.execute(
-            f"SELECT customer_id FROM reviews_by_date_star WHERE review_date IN ({date_list_formatted}) AND verified_purchase in (true, false) AND star_rating >= 4;")
+            f"SELECT customer_id FROM reviews_by_date_star WHERE review_date IN ({date_list_formatted}) AND verified_purchase in (true, false) AND star_rating >= 4;"
+        )
         return [{"customer_id": i[0]} for i in get_n_most_productive(res, n)]
